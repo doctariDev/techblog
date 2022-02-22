@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Check us out at http://doctarigroup.com
+Check us out at our [Website](http://doctarigroup.com)
