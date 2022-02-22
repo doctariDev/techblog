@@ -53,5 +53,5 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
-url: doctaridev.github.io
-baseurl: /techblog
+url: techblog.doctarigroup.com
+#baseurl: /techblog
