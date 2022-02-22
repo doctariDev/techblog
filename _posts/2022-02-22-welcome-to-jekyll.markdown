@@ -3,7 +3,7 @@ layout: post
 title:  "Welcome to our blog!"
 date:   2022-02-22 14:50:58 +0100
 categories: Welcome
-author: [Raul Firu](github.com/raulfiru)
+author: Raul Firu
 ---
 # Hello World
 
@@ -20,4 +20,3 @@ We do
 > ... and many, many more.
 
 Check us out at [GitHub](https://github.com/doctariDev/)
-
