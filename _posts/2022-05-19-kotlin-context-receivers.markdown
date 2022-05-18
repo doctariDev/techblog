@@ -36,7 +36,7 @@ characteristics:
 * the dispatch receiver can be provided explicitly (qualified syntax) or implicitly
 * `this` within a member body refers to its dispatch receiver
 
-The following example shows a Person class that has 3 member properties and 2 member functions.
+The following example shows a Person class that has 3 member properties and 1 member functions.
 The example also shows how members can be accessed implicitly or explicitly via qualified syntax. 
 
 ```kotlin
@@ -337,8 +337,8 @@ fun homeBreadcrumb(urls: Urls, i18n: I18n): String = """<a href="${urls.homeUrl}
 ```
 
 The problem in above example is that dependency injection does not play well with top level functions. The `urls` and
-`i18n` dependencies cannot be injected automatically for us, instead we need to provide them explicitly as arguments.
-This can quickly get out of hands, if the number of dependencies is large.
+`i18n` dependencies cannot be injected automatically into the `homebreadcrumb` function for us. Instead, we need to 
+provide them explicitly as arguments. This can quickly get out of hands, if the number of dependencies is large.
 
 Prior to Kotlin 1.6.20 there was a way to solve this with a pattern that we call the *contextual interface pattern*.
 Lets see how it looks like:
@@ -378,12 +378,12 @@ The main difference to the previous example is that our new `SearchController` n
 `UrlContext` and the `I18nContext`. Furthermore, the new `homeBreadcrumb` function is now defined as an extension on a
 generic type `T` which needs to be a subtype of both of those context interfaces.
 
-Because our new controller class is implementing both of those context interfaces, it can call the `homebreadcrumb`
-function more conveniently now. The dependencies do not anymore exist as arguments, and the extension receiver is
-provided implicitly.
+Because our new controller class is implementing both of those context interfaces, it can serve as the extension 
+receiver of our new `homebreadcrumb` function. The dependencies do not anymore exist as arguments, and the extension
+receiver is conveniently provided implicitly.
 
 Besides the slightly more complex signature for our top level function, the main disadvantage of this pattern is that
-we need to make both of the controller's dependencies public.
+we now need to make both of the controller's dependencies *public* properties of the class.
 
 We can solve both of these disadvantages by making both the `SearchController` class and `homebreadcrumb` function have
 context receivers:
@@ -444,11 +444,12 @@ context(Monoid<T>)
 fun <T> List<T>.sum(): T = fold(unit) { acc, e -> acc + e }
 ```
 Instead of implementing the algorithm 3 times, we now implement it only once on a list of arbitrary generic type `T`.
-In addition, we declare that the function has a context receiver of type `Monoid<T>`. The monoid interface provides us
-the parts that need to be abstracted: the initial neutral value for our folding algorithm is encoded in the monoid's
-`unit` property, and the combination operation is represented by the monoid's `plus` function.
+In addition, we declare that the function has a context receiver of type `Monoid<T>` (aka the type class). The monoid 
+interface provides us the parts that need to be abstracted: the initial neutral value for our folding algorithm is 
+encoded in the monoid's `unit` property, and the combination operation is represented by the monoid's `plus` function.
 
-Now we can define concrete implementations for our 3 use cases and use the sum function like this:
+Now we can define concrete implementations of our monoid interface for our 3 use cases and use the sum function like
+this:
 
 ```kotlin
 object IntMonoid : Monoid<Int> {
