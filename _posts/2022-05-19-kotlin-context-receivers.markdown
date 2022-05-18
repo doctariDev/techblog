@@ -89,7 +89,7 @@ class Person(val firstName: String, val lastName: String, val birthday: LocalDat
 val Person.name get() = "$firstName $lastName"
 val Person.age get() = birthday.until(LocalDate.now(), ChronoUnit.YEARS)
 
-fun Person02.greet(): String {
+fun Person.greet(): String {
   // provides extension receiver for "name" extension property explicitly
   // provides extension receiver for "age" extension property implicitly
   return "Hello, I'm ${this.name}, I'm $age years old"
