@@ -8,12 +8,12 @@ author: Fatih Coşkun
 # Context Receivers In Kotlin
 
 Kotlin [1.6.20](https://kotlinlang.org/docs/whatsnew1620.html) finally introduces 
-[context receivers](https://github.com/Kotlin/KEEP/blob/master/proposals/context-receivers.md#detailed-design), a new 
+[context receivers](https://github.com/Kotlin/KEEP/blob/master/proposals/context-receivers.md), a new 
 language feature that subsumes several language features that have been hotly discussed on various Kotlin boards for
 many years.
 
 In this post we will see what context receivers are, how they compare to other types of receivers in Kotlin, and various
-use cases in which they solve problems more concisely than was possible before.
+use cases in which they solve problems more concisely than how it was possible before.
 
 > ⚠️  As of today, context receivers are available as a prototype on Kotlin/JVM only. To use them, you will need to
 > enable them explicitly via the compiler flag `-Xcontext-receivers`.
@@ -41,7 +41,7 @@ The example also shows how members can be accessed implicitly or explicitly via 
 
 ```kotlin
 class Person(val name: String, val birthday: LocalDate) {
-  val age = birthday.until(LocalDate.now(), ChronoUnit.YEARS)
+  val age get() = birthday.until(LocalDate.now(), ChronoUnit.YEARS)
 
   fun greet(): String {
     // provides dispatch receiver for "name" property explicitly
@@ -165,11 +165,11 @@ fun main() {
   }
 }
 ```
-We can see in above example that member extensions differ from ordinary members or extensions in one important regard.
+We can see in above example that member extensions differ from ordinary members or extensions in one important regard:
 Since the syntax does not allow us to provide more than 1 receiver explicitly, we are forced to provide the dispatch
 receiver implicitly.
 
-Next we will see one more example for member extensions that will demonstrate a real use case for them. It is taken from
+Next, we will see one more example for member extensions that will demonstrate a real use case for them. It is taken from
 the Android world.
 
 ```kotlin
@@ -189,7 +189,7 @@ Normally, we would like to define this property in some global package as a top 
 The problem is that the implementation of this property needs both of its receivers, the integer and the
 Activity. Prior to Kotlin 1.6.20 there was no way to have top level declarations with more than 1 receiver.  
 
-So now, lets finally see how we can improve things with Kotlin's new context receivers feature.
+So now, let's finally see how we can improve things with Kotlin's new context receivers feature.
 
 ## Context Receivers
 
