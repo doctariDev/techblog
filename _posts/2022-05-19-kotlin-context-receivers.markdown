@@ -390,14 +390,14 @@ context receivers:
 
 ```kotlin
 context(UrlContext, I18nContext)
-class SearchController11 {
+class SearchController {
   fun render(): String = """
     <html>
       <head>
         <title>${i18n.searchTitle}</title>
       </head>
       <body>
-        ${homeBreadcrumb11()}
+        ${homeBreadcrumb()}
         <h1>${i18n.searchTitle}</h1>
       </body>
     </html>
@@ -405,7 +405,7 @@ class SearchController11 {
 }
 
 context(UrlContext, I18nContext)
-fun homeBreadcrumb11(): String = """<a href="${urls.homeUrl}">${i18n.homeTitle}</a>"""
+fun homeBreadcrumb(): String = """<a href="${urls.homeUrl}">${i18n.homeTitle}</a>"""
 ```
 
 
