@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Context Receivers in Kotlin"
-date:   2022-05-19 08:00:00 +0100
+date:   2022-05-18 08:00:00 +0100
 categories: Kotlin
 author: Fatih Coşkun
 ---
